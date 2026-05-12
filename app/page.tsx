@@ -522,12 +522,7 @@ export default function Portfolio() {
           <form
             action={`https://formspree.io/f/${FORMSPREE_ID}`}
             method="POST"
-            onSubmit={(e) => {
-              if (FORMSPREE_ID === 'YOUR_FORM_ID') {
-                e.preventDefault()
-                alert('Form not yet connected. Sign up at formspree.io and replace YOUR_FORM_ID in page.tsx.')
-                return
-              }
+            onSubmit={() => {
               track('reference_submitted')
               setRefSubmitted(true)
             }}

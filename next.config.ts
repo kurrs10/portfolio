@@ -8,6 +8,4 @@ export default withSentryConfig(nextConfig, {
   project: 'portfolio',
   silent: !process.env.CI,
   widenClientFileUpload: true,
-  disableLogger: true,
-  automaticVercelMonitors: true,
 })
