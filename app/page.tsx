@@ -502,7 +502,7 @@ export default function Portfolio() {
           </div>
         )}
 
-        <h3 className="text-lg font-bold mb-6" style={{ color: '#1a2e1a' }}>Submit a Reference</h3>
+        <h3 className="text-lg font-bold mb-6" style={{ color: '#1a2e1a' }}>Leave a Recommendation</h3>
 
         {refSubmitted ? (
           <div
@@ -627,7 +627,7 @@ export default function Portfolio() {
             className="px-6 py-3 rounded-full font-semibold border-2 transition-opacity hover:opacity-70"
             style={{ borderColor: '#a8c4a8', color: '#3d5a3e', backgroundColor: 'transparent' }}
           >
-            Submit a Reference
+            Leave a Recommendation
           </a>
         </div>
       </section>
