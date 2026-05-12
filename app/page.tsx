@@ -273,7 +273,7 @@ export default function Portfolio() {
         <div className="grid md:grid-cols-2 gap-10">
           <div className="space-y-5 text-base leading-relaxed" style={{ color: '#3d5a3e' }}>
             <p>
-              I studied Kinesiology at Penn State because I've always been drawn to understanding how people behave and what motivates them. That curiosity never left — it became the foundation for how I approach product work: start with the human, build backward from what they need.
+              I studied Kinesiology at Penn State because I've always been drawn to understanding how people move and what motivates them. That curiosity never left — it became the foundation for how I approach product work: start with the human, build backward from what they need.
             </p>
             <p>
               Over the past 9 years I've shipped products across cloud management, fraud detection, data platforms, and mobile apps at Capital One and Navy Federal. I was promoted at Capital One within 16 months for the product impact I drove. I've led cross-functional teams across complex orgs and learned to make decisions with real stakes in regulated, high-accountability environments.
