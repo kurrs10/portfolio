@@ -466,8 +466,8 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* References — hidden from nav until REFERENCES array is populated; form stays accessible via direct link */}
-      <section id="references" className="max-w-5xl mx-auto px-6 py-16 border-t" style={{ borderColor: '#ddeedd', display: REFERENCES.length === 0 ? 'none' : undefined }}>
+      {/* References — nav link hidden until REFERENCES array is populated; form always visible */}
+      <section id="references" className="max-w-5xl mx-auto px-6 py-16 border-t" style={{ borderColor: '#ddeedd' }}>
         <h2 className="text-3xl font-bold mb-3" style={{ color: '#1a2e1a' }}>References</h2>
         <p className="text-base mb-10 max-w-xl" style={{ color: '#3d5a3e' }}>
           Know me from a previous role? I'd love to include your endorsement here. Fill out the form below and I'll be in touch.
@@ -620,6 +620,14 @@ export default function Portfolio() {
             style={{ borderColor: '#a8c4a8', color: '#3d5a3e', backgroundColor: 'transparent' }}
           >
             GitHub
+          </a>
+          <a
+            href="#references"
+            onClick={() => track('reference_form_click')}
+            className="px-6 py-3 rounded-full font-semibold border-2 transition-opacity hover:opacity-70"
+            style={{ borderColor: '#a8c4a8', color: '#3d5a3e', backgroundColor: 'transparent' }}
+          >
+            Submit a Reference
           </a>
         </div>
       </section>
