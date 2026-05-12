@@ -523,6 +523,8 @@ export default function Portfolio() {
             }}
             className="grid md:grid-cols-2 gap-4 max-w-2xl"
           >
+            {/* Honeypot — bots fill this, humans don't, Formspree silently discards the submission */}
+            <input type="text" name="_gotcha" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
             {[
               { name: 'name', label: 'Your Name', placeholder: 'Jane Smith', type: 'text', required: true },
               { name: 'title', label: 'Title', placeholder: 'Senior Director of Product', type: 'text', required: true },
