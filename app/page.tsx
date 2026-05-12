@@ -1,65 +1,649 @@
-import Image from "next/image";
+'use client'
 
-export default function Home() {
+import { useState } from 'react'
+import { track } from '@vercel/analytics'
+
+const NAV_LINKS = [
+  { label: 'About', href: '#about' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Experience', href: '#experience' },
+  { label: 'Skills', href: '#skills' },
+  { label: 'References', href: '#references' },
+  { label: 'Contact', href: '#contact' },
+]
+
+const FORMSPREE_ID = 'xzdooqnq'
+
+// To add an approved reference: copy one of the objects below and fill in the details.
+// Push to GitHub and Vercel will auto-deploy the update.
+const REFERENCES: { name: string; title: string; company: string; relationship: string; quote: string }[] = [
+  // Example — replace with real submissions:
+  // {
+  //   name: "Jane Smith",
+  //   title: "Senior Director of Product",
+  //   company: "Capital One",
+  //   relationship: "Direct manager",
+  //   quote: "Kirsten is one of the most thoughtful and data-driven PMs I've worked with...",
+  // },
+]
+
+const PROJECTS = [
+  {
+    title: 'Coffee Personality Quiz',
+    description: 'A "What\'s Your Coffee Personality?" quiz that matches your energy and habits to a coffee archetype. Built end-to-end with AI tools — from requirements to deployed web app.',
+    tags: ['Next.js', 'React', 'Claude Code', 'Vercel'],
+    link: 'https://quiz-project-kursten.vercel.app',
+    linkLabel: 'View Live',
+    status: 'live',
+  },
+  {
+    title: 'Vacation Itinerary App',
+    description: 'A travel planning app that helps you build and organize trip itineraries. Designed for the kind of traveler who plans — but still leaves room for adventure.',
+    tags: ['Next.js', 'React', 'Claude Code'],
+    link: null,
+    linkLabel: 'Coming Soon',
+    status: 'coming-soon',
+  },
+  {
+    title: 'GitHub',
+    description: 'All personal projects and code are open on GitHub. More coming as I continue building with AI tools.',
+    tags: ['Open Source'],
+    link: 'https://github.com/kurrs10',
+    linkLabel: 'View Profile',
+    status: 'live',
+  },
+]
+
+const EXPERIENCE = [
+  {
+    company: 'Capital One',
+    role: 'Product Manager — Slingshot',
+    period: 'Apr 2021 — Present',
+    highlights: [
+      'Own strategy and execution for Slingshot, a B2B cloud management platform helping enterprise customers optimize data-cloud workloads',
+      'Led Databricks expansion across three engineering teams — shipped two weeks ahead of schedule',
+      'Drove AI optimization initiatives with projected 50% gains in query runtime performance',
+      'Restored Snowflake Cost Alerts: engagement grew from 2.1% → 9.4% of sessions, tenant interaction from 24% → 45%',
+      'Presented at 2025 Data + AI Summit',
+    ],
+  },
+  {
+    company: 'Capital One',
+    role: 'Product Manager — Data Management Platform',
+    period: 'Apr 2021 — 2023',
+    highlights: [
+      'Owned dataset registration experience for internal data publishing platform',
+      'Led full product experience redesign, reducing user friction and adding metadata management capabilities',
+      'Earned promotion within 16 months based on product impact',
+    ],
+  },
+  {
+    company: 'Navy Federal Credit Union',
+    role: 'Project Manager II',
+    period: 'Mar 2020 — Apr 2021',
+    highlights: [
+      'Led delivery of ML-driven fraud detection system enabling real-time decisioning for applications and money movement',
+      'Managed end-to-end delivery plans, adapting scope, priorities, and timelines based on evolving business needs',
+      'Partnered cross-functionally with internal teams, vendors, and leadership to ensure alignment and mitigate risks',
+      'Supported Security Operations leadership with ad hoc initiatives, including executive-level presentations for future programs',
+    ],
+  },
+  {
+    company: 'Navy Federal Credit Union',
+    role: 'Product Owner',
+    period: 'Nov 2017 — Mar 2020',
+    highlights: [
+      'Owned mobile app product initiatives — delivered credit card and security features aligned to member needs',
+      'Led agile product team end-to-end: managed backlog, defined epics and acceptance criteria, ensured release quality',
+      'Defined requirements for backend services and partnered cross-functionally to enable mobile app integrations',
+      'Collaborated with Member Research team to translate qualitative and quantitative insights into product improvements',
+    ],
+  },
+  {
+    company: 'Navy Federal Credit Union',
+    role: 'Staff Assistant II & III',
+    period: 'Mar 2016 — Nov 2017',
+    highlights: [
+      'Supported operational and administrative functions within the organization',
+      'Built foundational knowledge of financial services operations and cross-functional collaboration',
+    ],
+  },
+]
+
+const PM_SKILLS = [
+  'Product Strategy & Roadmapping',
+  'End-to-End Product Lifecycle',
+  'Data-Driven Decision Making',
+  'A/B Testing & Experimentation',
+  'User Research & Synthesis',
+  'Agile / Scrum',
+  'Backlog Management',
+  'Go-to-Market Strategy',
+  'Stakeholder Management',
+  'Executive Communication',
+  'B2B & Enterprise SaaS',
+  'AI/ML Product Development',
+]
+
+const AI_SKILLS = [
+  'Claude Code',
+  'Vibe Coding',
+  'Next.js',
+  'React',
+  'Vercel',
+  'GitHub',
+  'Prompt Engineering',
+  'AI Product Prototyping',
+]
+
+const CERTS = [
+  'SAFe POPM Certification',
+  'Certified Scrum Master',
+  'Certified Scrum Product Owner',
+  'B.S. Kinesiology — Penn State',
+]
+
+export default function Portfolio() {
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [copied, setCopied] = useState(false)
+  const [refSubmitted, setRefSubmitted] = useState(false)
+  const [refForm, setRefForm] = useState({ name: '', title: '', company: '', email: '', relationship: '', message: '' })
+
+  const handleCopyEmail = () => {
+    track('contact_email_copy')
+    navigator.clipboard.writeText('kbevans13@gmail.com').then(() => {
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    })
+  }
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
+    <div className="min-h-screen" style={{ backgroundColor: '#f8faf7', color: '#1a2e1a' }}>
+
+      {/* Nav */}
+      <nav
+        className="sticky top-0 z-50 border-b"
+        style={{ backgroundColor: 'rgba(248,250,247,0.95)', borderColor: '#ddeedd', backdropFilter: 'blur(8px)' }}
+      >
+        <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+          <span className="font-bold text-lg tracking-tight" style={{ color: '#2d6a4f' }}>
+            Kirsten Evans
+          </span>
+          {/* Desktop nav */}
+          <div className="hidden md:flex items-center gap-6">
+            {NAV_LINKS.map((l) => (
+              <a
+                key={l.label}
+                href={l.href}
+                className="text-sm font-medium transition-colors hover:opacity-70"
+                style={{ color: '#3d5a3e' }}
+              >
+                {l.label}
+              </a>
+            ))}
             <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              href="/resume.pdf"
+              download
+              onClick={() => track('resume_download', { location: 'nav' })}
+              className="text-sm font-semibold px-4 py-2 rounded-full transition-opacity hover:opacity-90"
+              style={{ backgroundColor: '#2d6a4f', color: '#fff' }}
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+              Resume
+            </a>
+          </div>
+          {/* Mobile menu button */}
+          <button
+            className="md:hidden text-2xl"
+            onClick={() => setMenuOpen(!menuOpen)}
+            style={{ color: '#2d6a4f' }}
+          >
+            {menuOpen ? '✕' : '☰'}
+          </button>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
+        {/* Mobile menu */}
+        {menuOpen && (
+          <div className="md:hidden border-t px-6 pb-4 flex flex-col gap-3" style={{ borderColor: '#ddeedd' }}>
+            {NAV_LINKS.map((l) => (
+              <a
+                key={l.label}
+                href={l.href}
+                className="text-sm font-medium py-1"
+                style={{ color: '#3d5a3e' }}
+                onClick={() => setMenuOpen(false)}
+              >
+                {l.label}
+              </a>
+            ))}
+            <a
+              href="/resume.pdf"
+              download
+              className="text-sm font-semibold px-4 py-2 rounded-full text-center mt-1"
+              style={{ backgroundColor: '#2d6a4f', color: '#fff' }}
+              onClick={() => { setMenuOpen(false); track('resume_download', { location: 'mobile_nav' }) }}
+            >
+              Resume
+            </a>
+          </div>
+        )}
+      </nav>
+
+      {/* Hero */}
+      <section className="max-w-5xl mx-auto px-6 pt-24 pb-20">
+        <p className="text-sm font-semibold tracking-widest uppercase mb-4" style={{ color: '#5a9e6f' }}>
+          Product Manager
+        </p>
+        <h1 className="text-5xl md:text-6xl font-bold leading-tight mb-2" style={{ color: '#1a2e1a' }}>
+          Hi, I'm Kirsten.
+        </h1>
+        <p className="text-sm mb-6" style={{ color: '#7a9e7a' }}>
+          pronounced <span className="italic">Kur-sten</span>
+        </p>
+        <p className="text-xl md:text-2xl leading-relaxed max-w-2xl mb-8" style={{ color: '#3d5a3e' }}>
+          Data-driven PM with 9+ years building enterprise products — from cloud platforms and fraud detection to mobile apps and AI-powered tools.
+        </p>
+        <div className="flex flex-wrap gap-3">
           <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+            href="https://www.linkedin.com/in/kirsten-evans27"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => track('linkedin_click', { location: 'hero' })}
+            className="px-6 py-3 rounded-full font-semibold text-white transition-opacity hover:opacity-90"
+            style={{ backgroundColor: '#2d6a4f' }}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
+            LinkedIn
           </a>
           <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#contact"
+            onClick={() => track('hero_cta_contact')}
+            className="px-6 py-3 rounded-full font-semibold border-2 transition-opacity hover:opacity-70"
+            style={{ borderColor: '#2d6a4f', color: '#2d6a4f', backgroundColor: 'transparent' }}
           >
-            Documentation
+            Get in Touch
+          </a>
+          <a
+            href="/resume.pdf"
+            download
+            onClick={() => track('resume_download', { location: 'hero' })}
+            className="px-6 py-3 rounded-full font-semibold border-2 transition-opacity hover:opacity-70"
+            style={{ borderColor: '#a8c4a8', color: '#3d5a3e', backgroundColor: 'transparent' }}
+          >
+            Download Resume
           </a>
         </div>
-      </main>
+      </section>
+
+      {/* About */}
+      <section id="about" className="max-w-5xl mx-auto px-6 py-16 border-t" style={{ borderColor: '#ddeedd' }}>
+        <h2 className="text-3xl font-bold mb-8" style={{ color: '#1a2e1a' }}>About</h2>
+        <div className="grid md:grid-cols-2 gap-10">
+          <div className="space-y-5 text-base leading-relaxed" style={{ color: '#3d5a3e' }}>
+            <p>
+              I studied Kinesiology at Penn State because I've always been drawn to understanding how people behave and what motivates them. That curiosity never left — it became the foundation for how I approach product work.
+            </p>
+            <p>
+              Over the past 9 years I've built data platforms, cloud management tools, fraud detection systems, and mobile features at Capital One and Navy Federal. I've shipped products that people depend on every day, led cross-functional teams across complex orgs, and learned to make decisions with real stakes.
+            </p>
+            <p>
+              Now I'm adding a new skill set to that foundation: AI-assisted product development. I build my own projects using Claude Code and modern web tools — which means I can prototype, validate, and communicate ideas faster than most PMs.
+            </p>
+            <p>
+              I'm based in Colorado Springs, CO and open to remote opportunities.
+            </p>
+          </div>
+          <div className="space-y-4">
+            <div className="rounded-2xl p-6" style={{ backgroundColor: '#fff', border: '1px solid #ddeedd' }}>
+              <p className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: '#5a9e6f' }}>
+                What I bring
+              </p>
+              <ul className="space-y-2 text-sm" style={{ color: '#3d5a3e' }}>
+                <li>✓ 9+ years PM experience at enterprise scale</li>
+                <li>✓ B.S. Kinesiology — genuine health/fitness domain knowledge</li>
+                <li>✓ AI-assisted product development skills</li>
+                <li>✓ Data-driven decision making at every level</li>
+                <li>✓ Track record of shipping on time and ahead of schedule</li>
+              </ul>
+            </div>
+            <div className="rounded-2xl p-6" style={{ backgroundColor: '#fff', border: '1px solid #ddeedd' }}>
+              <p className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: '#5a9e6f' }}>
+                What I'm looking for
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {['Remote-friendly', 'Product Manager', 'Consumer or B2B', 'Mission-driven', 'High-impact team'].map((tag) => (
+                  <span
+                    key={tag}
+                    className="text-xs px-3 py-1 rounded-full font-medium"
+                    style={{ backgroundColor: '#e8f5e8', color: '#2d6a4f' }}
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Projects */}
+      <section id="projects" className="max-w-5xl mx-auto px-6 py-16 border-t" style={{ borderColor: '#ddeedd' }}>
+        <h2 className="text-3xl font-bold mb-8" style={{ color: '#1a2e1a' }}>Projects</h2>
+        <div className="grid md:grid-cols-3 gap-6">
+          {PROJECTS.map((project) => (
+            <div
+              key={project.title}
+              className="rounded-2xl p-6 flex flex-col"
+              style={{ backgroundColor: '#fff', border: '1px solid #ddeedd' }}
+            >
+              <div className="flex items-start justify-between mb-3">
+                <h3 className="font-bold text-lg leading-tight" style={{ color: '#1a2e1a' }}>
+                  {project.title}
+                </h3>
+                {project.status === 'live' && (
+                  <span
+                    className="text-xs px-2 py-0.5 rounded-full font-semibold ml-2 flex-shrink-0"
+                    style={{ backgroundColor: '#e8f5e8', color: '#2d6a4f' }}
+                  >
+                    Live
+                  </span>
+                )}
+                {project.status === 'coming-soon' && (
+                  <span
+                    className="text-xs px-2 py-0.5 rounded-full font-semibold ml-2 flex-shrink-0"
+                    style={{ backgroundColor: '#fff8e8', color: '#b8860b' }}
+                  >
+                    Soon
+                  </span>
+                )}
+              </div>
+              <p className="text-sm leading-relaxed mb-4 flex-1" style={{ color: '#3d5a3e' }}>
+                {project.description}
+              </p>
+              <div className="flex flex-wrap gap-1.5 mb-4">
+                {project.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="text-xs px-2 py-0.5 rounded-full"
+                    style={{ backgroundColor: '#f0f7f0', color: '#3d5a3e' }}
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              {project.link ? (
+                <a
+                  href={project.link}
+                  target={project.link.startsWith('http') ? '_blank' : undefined}
+                  rel="noopener noreferrer"
+                  onClick={() => track('project_click', { project: project.title })}
+                  className="text-sm font-semibold transition-opacity hover:opacity-70"
+                  style={{ color: '#2d6a4f' }}
+                >
+                  {project.linkLabel} →
+                </a>
+              ) : (
+                <span className="text-sm font-semibold" style={{ color: '#a8c4a8' }}>
+                  {project.linkLabel}
+                </span>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Experience */}
+      <section id="experience" className="max-w-5xl mx-auto px-6 py-16 border-t" style={{ borderColor: '#ddeedd' }}>
+        <h2 className="text-3xl font-bold mb-8" style={{ color: '#1a2e1a' }}>Experience</h2>
+        <div className="space-y-8">
+          {EXPERIENCE.map((job, i) => (
+            <div
+              key={i}
+              className="rounded-2xl p-6"
+              style={{ backgroundColor: '#fff', border: '1px solid #ddeedd' }}
+            >
+              <div className="flex flex-wrap items-start justify-between gap-2 mb-4">
+                <div>
+                  <h3 className="font-bold text-lg" style={{ color: '#1a2e1a' }}>{job.role}</h3>
+                  <p className="text-sm font-semibold" style={{ color: '#2d6a4f' }}>{job.company}</p>
+                </div>
+                <span className="text-sm" style={{ color: '#7a9e7a' }}>{job.period}</span>
+              </div>
+              <ul className="space-y-2">
+                {job.highlights.map((h, j) => (
+                  <li key={j} className="text-sm leading-relaxed flex gap-2" style={{ color: '#3d5a3e' }}>
+                    <span className="flex-shrink-0 mt-0.5" style={{ color: '#5a9e6f' }}>▸</span>
+                    {h}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Skills */}
+      <section id="skills" className="max-w-5xl mx-auto px-6 py-16 border-t" style={{ borderColor: '#ddeedd' }}>
+        <h2 className="text-3xl font-bold mb-8" style={{ color: '#1a2e1a' }}>Skills</h2>
+        <div className="grid md:grid-cols-3 gap-6">
+          <div className="rounded-2xl p-6" style={{ backgroundColor: '#fff', border: '1px solid #ddeedd' }}>
+            <p className="text-xs font-semibold uppercase tracking-wider mb-4" style={{ color: '#5a9e6f' }}>
+              Product Management
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {PM_SKILLS.map((s) => (
+                <span
+                  key={s}
+                  className="text-xs px-3 py-1.5 rounded-full"
+                  style={{ backgroundColor: '#f0f7f0', color: '#2d4a2e' }}
+                >
+                  {s}
+                </span>
+              ))}
+            </div>
+          </div>
+          <div className="rounded-2xl p-6" style={{ backgroundColor: '#fff', border: '1px solid #ddeedd' }}>
+            <p className="text-xs font-semibold uppercase tracking-wider mb-4" style={{ color: '#5a9e6f' }}>
+              AI & Tools
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {AI_SKILLS.map((s) => (
+                <span
+                  key={s}
+                  className="text-xs px-3 py-1.5 rounded-full"
+                  style={{ backgroundColor: '#f5fbf5', color: '#2d4a2e', border: '1px solid #c8e6c8' }}
+                >
+                  {s}
+                </span>
+              ))}
+            </div>
+          </div>
+          <div className="rounded-2xl p-6" style={{ backgroundColor: '#fff', border: '1px solid #ddeedd' }}>
+            <p className="text-xs font-semibold uppercase tracking-wider mb-4" style={{ color: '#5a9e6f' }}>
+              Education & Certifications
+            </p>
+            <ul className="space-y-2">
+              {CERTS.map((c) => (
+                <li key={c} className="text-sm flex gap-2 items-start" style={{ color: '#3d5a3e' }}>
+                  <span style={{ color: '#5a9e6f' }}>✓</span>
+                  {c}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* References */}
+      <section id="references" className="max-w-5xl mx-auto px-6 py-16 border-t" style={{ borderColor: '#ddeedd' }}>
+        <h2 className="text-3xl font-bold mb-3" style={{ color: '#1a2e1a' }}>References</h2>
+        <p className="text-base mb-10 max-w-xl" style={{ color: '#3d5a3e' }}>
+          Know me from a previous role? I'd love to include your endorsement here. Fill out the form below and I'll be in touch.
+        </p>
+
+        {/* Approved reference cards */}
+        {REFERENCES.length > 0 && (
+          <div className="grid md:grid-cols-2 gap-6 mb-12">
+            {REFERENCES.map((ref, i) => (
+              <div
+                key={i}
+                className="rounded-2xl p-6 flex flex-col gap-4"
+                style={{ backgroundColor: '#fff', border: '1px solid #ddeedd' }}
+              >
+                <p className="text-sm leading-relaxed italic" style={{ color: '#3d5a3e' }}>
+                  &ldquo;{ref.quote}&rdquo;
+                </p>
+                <div className="flex items-center gap-3 mt-auto pt-4" style={{ borderTop: '1px solid #f0f7f0' }}>
+                  <div
+                    className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0"
+                    style={{ backgroundColor: '#e8f5e8', color: '#2d6a4f' }}
+                  >
+                    {ref.name.charAt(0)}
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold" style={{ color: '#1a2e1a' }}>{ref.name}</p>
+                    <p className="text-xs" style={{ color: '#7a9e7a' }}>{ref.title}, {ref.company} — {ref.relationship}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        <h3 className="text-lg font-bold mb-6" style={{ color: '#1a2e1a' }}>Submit a Reference</h3>
+
+        {refSubmitted ? (
+          <div
+            className="rounded-2xl p-8 text-center max-w-lg mx-auto"
+            style={{ backgroundColor: '#e8f5e8', border: '1px solid #c8e6c8' }}
+          >
+            <div className="text-3xl mb-3">✓</div>
+            <h3 className="font-bold text-lg mb-2" style={{ color: '#2d6a4f' }}>Thank you!</h3>
+            <p className="text-sm" style={{ color: '#3d5a3e' }}>Your reference has been submitted. I really appreciate it.</p>
+          </div>
+        ) : (
+          <form
+            action={`https://formspree.io/f/${FORMSPREE_ID}`}
+            method="POST"
+            onSubmit={(e) => {
+              if (FORMSPREE_ID === 'YOUR_FORM_ID') {
+                e.preventDefault()
+                alert('Form not yet connected. Sign up at formspree.io and replace YOUR_FORM_ID in page.tsx.')
+                return
+              }
+              track('reference_submitted')
+              setRefSubmitted(true)
+            }}
+            className="grid md:grid-cols-2 gap-4 max-w-2xl"
+          >
+            {[
+              { name: 'name', label: 'Your Name', placeholder: 'Jane Smith', type: 'text', required: true },
+              { name: 'title', label: 'Title', placeholder: 'Senior Director of Product', type: 'text', required: true },
+              { name: 'company', label: 'Company', placeholder: 'Capital One', type: 'text', required: true },
+              { name: 'email', label: 'Your Email', placeholder: 'jane@company.com', type: 'email', required: true },
+              { name: 'relationship', label: 'How do you know Kirsten?', placeholder: 'e.g. Direct manager at Capital One', type: 'text', required: true },
+            ].map((field) => (
+              <div key={field.name} className={field.name === 'relationship' ? 'md:col-span-2' : ''}>
+                <label className="block text-xs font-semibold uppercase tracking-wide mb-1.5" style={{ color: '#5a9e6f' }}>
+                  {field.label}
+                </label>
+                <input
+                  type={field.type}
+                  name={field.name}
+                  required={field.required}
+                  placeholder={field.placeholder}
+                  value={refForm[field.name as keyof typeof refForm]}
+                  onChange={(e) => setRefForm({ ...refForm, [field.name]: e.target.value })}
+                  className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all"
+                  style={{
+                    backgroundColor: '#fff',
+                    border: '1.5px solid #ddeedd',
+                    color: '#1a2e1a',
+                  }}
+                  onFocus={(e) => { e.currentTarget.style.borderColor = '#2d6a4f' }}
+                  onBlur={(e) => { e.currentTarget.style.borderColor = '#ddeedd' }}
+                />
+              </div>
+            ))}
+            <div className="md:col-span-2">
+              <label className="block text-xs font-semibold uppercase tracking-wide mb-1.5" style={{ color: '#5a9e6f' }}>
+                Endorsement / Comments
+              </label>
+              <textarea
+                name="message"
+                rows={4}
+                placeholder="Share a few words about working with Kirsten — her strengths, impact, or anything you'd want a future employer to know."
+                value={refForm.message}
+                onChange={(e) => setRefForm({ ...refForm, message: e.target.value })}
+                className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all resize-none"
+                style={{
+                  backgroundColor: '#fff',
+                  border: '1.5px solid #ddeedd',
+                  color: '#1a2e1a',
+                }}
+                onFocus={(e) => { e.currentTarget.style.borderColor = '#2d6a4f' }}
+                onBlur={(e) => { e.currentTarget.style.borderColor = '#ddeedd' }}
+              />
+            </div>
+            <div className="md:col-span-2">
+              <button
+                type="submit"
+                className="px-8 py-3 rounded-full font-semibold text-white transition-opacity hover:opacity-90"
+                style={{ backgroundColor: '#2d6a4f' }}
+              >
+                Submit Reference
+              </button>
+            </div>
+          </form>
+        )}
+      </section>
+
+      {/* Contact */}
+      <section id="contact" className="max-w-5xl mx-auto px-6 py-16 border-t" style={{ borderColor: '#ddeedd' }}>
+        <h2 className="text-3xl font-bold mb-4" style={{ color: '#1a2e1a' }}>Get in Touch</h2>
+        <p className="text-base mb-8 max-w-xl" style={{ color: '#3d5a3e' }}>
+          I'm actively looking for my next PM role. If you're building something meaningful and want a data-driven PM who can also prototype with AI — let's talk.
+        </p>
+        <div className="flex flex-wrap gap-4">
+          <button
+            onClick={handleCopyEmail}
+            className="px-6 py-3 rounded-full font-semibold text-white transition-opacity hover:opacity-90"
+            style={{ backgroundColor: '#2d6a4f' }}
+          >
+            {copied ? '✓ Copied!' : 'kbevans13@gmail.com'}
+          </button>
+          <a
+            href="https://www.linkedin.com/in/kirsten-evans27"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => track('linkedin_click', { location: 'contact' })}
+            className="px-6 py-3 rounded-full font-semibold border-2 transition-opacity hover:opacity-70"
+            style={{ borderColor: '#2d6a4f', color: '#2d6a4f', backgroundColor: 'transparent' }}
+          >
+            LinkedIn
+          </a>
+          <a
+            href="https://github.com/kurrs10"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => track('github_click', { location: 'contact' })}
+            className="px-6 py-3 rounded-full font-semibold border-2 transition-opacity hover:opacity-70"
+            style={{ borderColor: '#a8c4a8', color: '#3d5a3e', backgroundColor: 'transparent' }}
+          >
+            GitHub
+          </a>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t mt-8 py-8" style={{ borderColor: '#ddeedd' }}>
+        <div className="max-w-5xl mx-auto px-6 flex flex-wrap justify-between items-center gap-4">
+          <span className="text-sm" style={{ color: '#7a9e7a' }}>
+            © 2026 Kirsten Evans
+          </span>
+          <span className="text-sm" style={{ color: '#a8c4a8' }}>
+            Built with Claude Code
+          </span>
+        </div>
+      </footer>
+
     </div>
-  );
+  )
 }
