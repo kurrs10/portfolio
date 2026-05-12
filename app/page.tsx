@@ -273,7 +273,7 @@ export default function Portfolio() {
         <div className="grid md:grid-cols-2 gap-10">
           <div className="space-y-5 text-base leading-relaxed" style={{ color: '#3d5a3e' }}>
             <p>
-              I studied Kinesiology at Penn State because I've always been drawn to understanding how people move and what motivates them. That curiosity never left — it became the foundation for how I approach product work: start with the human, build backward from what they need.
+              I studied Kinesiology at Penn State and spent three years in the fitness industry — teaching classes, training clients, and running programs at fitness centers. I saw how these businesses operate from the inside: member retention, program design, and the gap between what people intend to do and what they actually do. I learned what keeps people showing up and what makes them quit. Eventually I wanted to solve that intention-action gap at scale — and product management turned out to be the right tool for it.
             </p>
             <p>
               Over the past 9 years I've shipped products across cloud management, fraud detection, data platforms, and mobile apps at Capital One and Navy Federal. I was promoted at Capital One within 16 months for the product impact I drove. I've led cross-functional teams across complex orgs and learned to make decisions with real stakes in regulated, high-accountability environments.
