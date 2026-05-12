@@ -3,15 +3,6 @@
 import { useState } from 'react'
 import { track } from '@vercel/analytics'
 
-const NAV_LINKS = [
-  { label: 'About', href: '#about' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Experience', href: '#experience' },
-  { label: 'Skills', href: '#skills' },
-  { label: 'References', href: '#references' },
-  { label: 'Contact', href: '#contact' },
-]
-
 const FORMSPREE_ID = 'xzdooqnq'
 
 // To add an approved reference: copy one of the objects below and fill in the details.
@@ -27,10 +18,22 @@ const REFERENCES: { name: string; title: string; company: string; relationship: 
   // },
 ]
 
+const BASE_NAV_LINKS = [
+  { label: 'About', href: '#about' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Experience', href: '#experience' },
+  { label: 'Skills', href: '#skills' },
+  { label: 'Contact', href: '#contact' },
+]
+
+const NAV_LINKS = REFERENCES.length > 0
+  ? [...BASE_NAV_LINKS.slice(0, 4), { label: 'References', href: '#references' }, BASE_NAV_LINKS[4]]
+  : BASE_NAV_LINKS
+
 const PROJECTS = [
   {
     title: 'Coffee Personality Quiz',
-    description: 'A "What\'s Your Coffee Personality?" quiz that matches your energy and habits to a coffee archetype. Built end-to-end with AI tools — from requirements to deployed web app.',
+    description: 'A "What\'s Your Coffee Personality?" quiz built end-to-end with AI tools — from requirements to deployed web app. Building this gave me direct experience with the full product lifecycle and sharpens how I write requirements and work with engineering teams.',
     tags: ['Next.js', 'React', 'Claude Code', 'Vercel'],
     link: 'https://quiz-project-kursten.vercel.app',
     linkLabel: 'View Live',
@@ -46,7 +49,7 @@ const PROJECTS = [
   },
   {
     title: 'GitHub',
-    description: 'All personal projects and code are open on GitHub. More coming as I continue building with AI tools.',
+    description: 'All personal projects and code are open on GitHub. Staying hands-on with building keeps me a sharper PM — I understand the tradeoffs engineers face because I face them too.',
     tags: ['Open Source'],
     link: 'https://github.com/kurrs10',
     linkLabel: 'View Profile',
@@ -60,11 +63,12 @@ const EXPERIENCE = [
     role: 'Product Manager — Slingshot',
     period: 'Apr 2021 — Present',
     highlights: [
-      'Own strategy and execution for Slingshot, a B2B cloud management platform helping enterprise customers optimize data-cloud workloads',
+      'Sole PM for Slingshot — a B2B cloud management platform serving enterprise customers — driving roadmap strategy across multiple engineering teams focused on cost efficiency, visibility, and automated governance',
+      'Restored Snowflake Cost Alerts: engagement grew from 2.1% → 9.4% of sessions, tenant interaction from 24% → 45%',
+      'Delivered Internal Viewer exceeding commitments by 25%, boosting CSM and support efficiency 5x by enabling full customer environment visibility',
       'Led Databricks expansion across three engineering teams — shipped two weeks ahead of schedule',
       'Drove AI optimization initiatives with projected 50% gains in query runtime performance',
-      'Restored Snowflake Cost Alerts: engagement grew from 2.1% → 9.4% of sessions, tenant interaction from 24% → 45%',
-      'Presented at 2025 Data + AI Summit',
+      'Selected to present at 2025 Data + AI Summit',
     ],
   },
   {
@@ -72,9 +76,9 @@ const EXPERIENCE = [
     role: 'Product Manager — Data Management Platform',
     period: 'Apr 2021 — 2023',
     highlights: [
-      'Owned dataset registration experience for internal data publishing platform',
-      'Led full product experience redesign, reducing user friction and adding metadata management capabilities',
-      'Earned promotion within 16 months based on product impact',
+      'Earned promotion within 16 months — faster than the standard cycle — based on product impact',
+      'Led full product experience redesign, reducing user friction and introducing new dataset metadata management capabilities',
+      'Owned dataset registration experience for internal data publishing platform serving data producers and consumers across the org',
     ],
   },
   {
@@ -97,15 +101,6 @@ const EXPERIENCE = [
       'Led agile product team end-to-end: managed backlog, defined epics and acceptance criteria, ensured release quality',
       'Defined requirements for backend services and partnered cross-functionally to enable mobile app integrations',
       'Collaborated with Member Research team to translate qualitative and quantitative insights into product improvements',
-    ],
-  },
-  {
-    company: 'Navy Federal Credit Union',
-    role: 'Staff Assistant II & III',
-    period: 'Mar 2016 — Nov 2017',
-    highlights: [
-      'Supported operational and administrative functions within the organization',
-      'Built foundational knowledge of financial services operations and cross-functional collaboration',
     ],
   },
 ]
@@ -239,7 +234,7 @@ export default function Portfolio() {
           pronounced <span className="italic">Kur-sten</span>
         </p>
         <p className="text-xl md:text-2xl leading-relaxed max-w-2xl mb-8" style={{ color: '#3d5a3e' }}>
-          Data-driven PM with 9+ years building enterprise products — from cloud platforms and fraud detection to mobile apps and AI-powered tools.
+          Adaptable PM with 9+ years shipping enterprise products across cloud platforms, mobile apps, fraud systems, and AI tools — I go where the work is interesting.
         </p>
         <div className="flex flex-wrap gap-3">
           <a
@@ -278,16 +273,16 @@ export default function Portfolio() {
         <div className="grid md:grid-cols-2 gap-10">
           <div className="space-y-5 text-base leading-relaxed" style={{ color: '#3d5a3e' }}>
             <p>
-              I studied Kinesiology at Penn State because I've always been drawn to understanding how people behave and what motivates them. That curiosity never left — it became the foundation for how I approach product work.
+              I studied Kinesiology at Penn State because I've always been drawn to understanding how people behave and what motivates them. That curiosity never left — it became the foundation for how I approach product work: start with the human, build backward from what they need.
             </p>
             <p>
-              Over the past 9 years I've built data platforms, cloud management tools, fraud detection systems, and mobile features at Capital One and Navy Federal. I've shipped products that people depend on every day, led cross-functional teams across complex orgs, and learned to make decisions with real stakes.
+              Over the past 9 years I've shipped products across cloud management, fraud detection, data platforms, and mobile apps at Capital One and Navy Federal. I was promoted at Capital One within 16 months for the product impact I drove. I've led cross-functional teams across complex orgs and learned to make decisions with real stakes in regulated, high-accountability environments.
             </p>
             <p>
-              Now I'm adding a new skill set to that foundation: AI-assisted product development. I build my own projects using Claude Code and modern web tools — which means I can prototype, validate, and communicate ideas faster than most PMs.
+              I also build software myself. I've shipped a live web app and this portfolio site using Claude Code and modern web tools. That changes how I work — I can prototype in days, speak the language of engineering without translation, and validate ideas before anyone writes a line of production code.
             </p>
             <p>
-              I'm based in Colorado Springs, CO and open to remote opportunities.
+              I'm based in Colorado Springs, CO, open to remote, and looking for my next challenge — wherever that takes me.
             </p>
           </div>
           <div className="space-y-4">
@@ -297,10 +292,10 @@ export default function Portfolio() {
               </p>
               <ul className="space-y-2 text-sm" style={{ color: '#3d5a3e' }}>
                 <li>✓ 9+ years PM experience at enterprise scale</li>
-                <li>✓ B.S. Kinesiology — genuine health/fitness domain knowledge</li>
-                <li>✓ AI-assisted product development skills</li>
-                <li>✓ Data-driven decision making at every level</li>
-                <li>✓ Track record of shipping on time and ahead of schedule</li>
+                <li>✓ B.S. Kinesiology — I understand how people behave, not just what they click</li>
+                <li>✓ I build and ship software — that changes how I work with engineering</li>
+                <li>✓ Promoted at Capital One within 16 months based on product impact</li>
+                <li>✓ Proven track record of shipping on time and ahead of schedule</li>
               </ul>
             </div>
             <div className="rounded-2xl p-6" style={{ backgroundColor: '#fff', border: '1px solid #ddeedd' }}>
@@ -471,8 +466,8 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* References */}
-      <section id="references" className="max-w-5xl mx-auto px-6 py-16 border-t" style={{ borderColor: '#ddeedd' }}>
+      {/* References — hidden from nav until REFERENCES array is populated; form stays accessible via direct link */}
+      <section id="references" className="max-w-5xl mx-auto px-6 py-16 border-t" style={{ borderColor: '#ddeedd', display: REFERENCES.length === 0 ? 'none' : undefined }}>
         <h2 className="text-3xl font-bold mb-3" style={{ color: '#1a2e1a' }}>References</h2>
         <p className="text-base mb-10 max-w-xl" style={{ color: '#3d5a3e' }}>
           Know me from a previous role? I'd love to include your endorsement here. Fill out the form below and I'll be in touch.
