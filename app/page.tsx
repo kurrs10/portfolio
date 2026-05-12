@@ -292,7 +292,7 @@ export default function Portfolio() {
               </p>
               <ul className="space-y-2 text-sm" style={{ color: '#3d5a3e' }}>
                 <li>✓ 9+ years PM experience at enterprise scale</li>
-                <li>✓ B.S. Kinesiology — I understand how people behave, not just what they click</li>
+                <li>✓ B.S. Kinesiology, Penn State</li>
                 <li>✓ I build and ship software — that changes how I work with engineering</li>
                 <li>✓ Promoted at Capital One within 16 months based on product impact</li>
                 <li>✓ Proven track record of shipping on time and ahead of schedule</li>
