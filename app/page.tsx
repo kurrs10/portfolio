@@ -530,6 +530,8 @@ export default function Portfolio() {
           <form
             onSubmit={async (e) => {
               e.preventDefault()
+              // Capture form data before any await — e.currentTarget becomes null after async calls
+              const formData = new FormData(e.currentTarget)
               const { error } = await supabase.from('endorsements').insert({
                 name: refForm.name,
                 title: refForm.title,
@@ -541,7 +543,6 @@ export default function Portfolio() {
               })
               if (!error) {
                 // Send email notification via Formspree so we know to go approve in Supabase
-                const formData = new FormData(e.currentTarget)
                 await fetch(`https://formspree.io/f/xzdooqnq`, {
                   method: 'POST',
                   body: formData,
@@ -612,7 +613,7 @@ export default function Portfolio() {
                 className="px-8 py-3 rounded-full font-semibold text-white transition-opacity hover:opacity-90"
                 style={{ backgroundColor: '#2d6a4f' }}
               >
-                Submit Reference
+                Submit
               </button>
             </div>
           </form>
