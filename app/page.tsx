@@ -142,6 +142,7 @@ export default function Portfolio() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [copied, setCopied] = useState(false)
   const [refSubmitted, setRefSubmitted] = useState(false)
+  const [refError, setRefError] = useState(false)
   const [refForm, setRefForm] = useState({ name: '', title: '', company: '', email: '', relationship: '', message: '' })
 
   const handleCopyEmail = () => {
@@ -511,20 +512,40 @@ export default function Portfolio() {
           >
             <div className="text-3xl mb-3">✓</div>
             <h3 className="font-bold text-lg mb-2" style={{ color: '#2d6a4f' }}>Thank you!</h3>
-            <p className="text-sm" style={{ color: '#3d5a3e' }}>Your reference has been submitted. I really appreciate it.</p>
+            <p className="text-sm" style={{ color: '#3d5a3e' }}>Your recommendation has been submitted. I really appreciate it.</p>
+          </div>
+        ) : refError ? (
+          <div
+            className="rounded-2xl p-8 text-center max-w-lg mx-auto"
+            style={{ backgroundColor: '#fef2f2', border: '1px solid #fecaca' }}
+          >
+            <div className="text-3xl mb-3">⚠️</div>
+            <h3 className="font-bold text-lg mb-2" style={{ color: '#dc2626' }}>Something went wrong</h3>
+            <p className="text-sm mb-4" style={{ color: '#6b4c2a' }}>The submission didn't go through. Please try again or email Kirsten directly at kbevans13@gmail.com.</p>
+            <button
+              onClick={() => setRefError(false)}
+              className="text-sm font-semibold underline"
+              style={{ color: '#dc2626' }}
+            >
+              Try again
+            </button>
           </div>
         ) : (
           <form
             onSubmit={async (e) => {
               e.preventDefault()
               const formData = new FormData(e.currentTarget)
-              await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+              const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
                 method: 'POST',
                 body: formData,
                 headers: { 'Accept': 'application/json' },
               })
-              track('reference_submitted')
-              setRefSubmitted(true)
+              if (res.ok) {
+                track('reference_submitted')
+                setRefSubmitted(true)
+              } else {
+                setRefError(true)
+              }
             }}
             className="grid md:grid-cols-2 gap-4 max-w-2xl"
           >
