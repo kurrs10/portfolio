@@ -33,18 +33,18 @@ const NAV_LINKS = REFERENCES.length > 0
 const PROJECTS = [
   {
     title: 'Coffee Personality Quiz',
-    description: 'A "What\'s Your Coffee Personality?" quiz built end-to-end with AI tools — from requirements to deployed web app. Building this gave me direct experience with the full product lifecycle and sharpens how I write requirements and work with engineering teams.',
-    tags: ['Next.js', 'React', 'Claude Code', 'Vercel'],
+    description: 'A "What\'s Your Coffee Personality?" quiz built end-to-end with AI — from product spec to deployed web app. Created as a capstone project after completing Claude Code for PMs (ccforpms.com), a hands-on course teaching product managers to build with AI tools. This is how I went from writing requirements to actually shipping software.',
+    tags: ['Next.js', 'React', 'Claude Code', 'Vercel', 'Claude Code for PMs'],
     link: 'https://quiz-project-kursten.vercel.app',
     linkLabel: 'View Live',
     status: 'live',
   },
   {
-    title: 'Vacation Itinerary App',
-    description: 'A travel planning app that helps you build and organize trip itineraries. Designed for the kind of traveler who plans — but still leaves room for adventure.',
-    tags: ['Next.js', 'React', 'Claude Code'],
-    link: null,
-    linkLabel: 'Coming Soon',
+    title: 'VOYAGR — Travel Companion App',
+    description: 'A mobile app for couples and small groups who plan their own multi-country trips. VOYAGR consolidates all bookings in one place, validates them, and guides travelers in real time — fully offline. Features: step-by-step transit directions, per-passport entry requirements, AI free-time suggestions, expense splitting, language basics, packing lists, emergency contacts, currency + tipping guides, and customizable alerts. Shipping June 2026.',
+    tags: ['React Native', 'Expo', 'Supabase', 'Claude API', 'iOS'],
+    link: 'https://github.com/kurrs10',
+    linkLabel: 'View on GitHub',
     status: 'coming-soon',
   },
   {
@@ -663,6 +663,9 @@ export default function Portfolio() {
         <div className="max-w-5xl mx-auto px-6 flex flex-wrap justify-between items-center gap-4">
           <span className="text-sm" style={{ color: '#7a9e7a' }}>
             © 2026 Kirsten Evans
+            <span className="ml-2" style={{ color: '#a8c4a8' }}>
+              (Yes, the domain is a different last name — not a bug, I&apos;m getting married!)
+            </span>
           </span>
           <span className="text-sm" style={{ color: '#a8c4a8' }}>
             Built with Claude Code
