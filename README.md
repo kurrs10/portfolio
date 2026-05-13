@@ -1,36 +1,87 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio — Kirsten Evans
 
-## Getting Started
+**Live site:** [www.kirstenmoberly.com](https://www.kirstenmoberly.com)
 
-First, run the development server:
+A product manager's portfolio built and instrumented the way a real product should be — with analytics, error monitoring, a database-backed content pipeline, and a deployment workflow that ships in under 60 seconds. Every tool here was chosen deliberately. This README explains what's running, why it's here, and what decisions it informs.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## Stack
+
+### Frontend
+| Tool | Purpose |
+|------|---------|
+| [Next.js](https://nextjs.org) | React framework — app router, server components, fast page loads |
+| [React](https://react.dev) | Component model for interactive UI (nav, forms, state) |
+| [Tailwind CSS](https://tailwindcss.com) | Utility-first styling — no stylesheet bloat |
+| [TypeScript](https://www.typescriptlang.org) | Type safety — catches issues before they reach production |
+
+### Hosting & Deployment
+| Tool | Purpose |
+|------|---------|
+| [Vercel](https://vercel.com) | Hosting + CI/CD — every push to `main` deploys automatically in ~30s |
+| [GitHub](https://github.com/kurrs10/portfolio) | Version control — full change history, rollback capability |
+
+### Analytics & Observability
+| Tool | What it measures | Why it matters |
+|------|-----------------|----------------|
+| [Vercel Analytics](https://vercel.com/analytics) | Page views, unique visitors, referrers, geography, device type | Top-of-funnel traffic — where visitors come from and what devices they use |
+| [Vercel Speed Insights](https://vercel.com/docs/speed-insights) | Core Web Vitals (LCP, CLS, FID) | Page performance directly impacts bounce rate — a slow portfolio loses the recruiter |
+| [PostHog](https://posthog.com) | Session recordings, heatmaps, click paths, time on page, custom events | Behavioral analytics — understand what visitors actually do, not just that they showed up |
+| [Sentry](https://sentry.io) | JavaScript errors, exceptions, crash reports | Catch and fix production errors before they affect a visitor's experience |
+
+### Custom Event Tracking
+The following user actions are instrumented with named events via Vercel Analytics:
+
+| Event | Trigger |
+|-------|---------|
+| `resume_download` | Resume downloaded from nav or hero |
+| `linkedin_click` | LinkedIn link clicked (hero or contact) |
+| `github_click` | GitHub link clicked |
+| `project_click` | Any project card link clicked |
+| `hero_cta_contact` | "Get in Touch" clicked in hero |
+| `contact_email_copy` | Email address copied to clipboard |
+| `reference_submitted` | Reference form submitted |
+| `reference_form_click` | "Leave a Recommendation" clicked |
+
+These events answer the questions that matter: Are people downloading my resume? Are they clicking through to LinkedIn? Which projects are getting attention?
+
+### Content Pipeline
+| Tool | Purpose |
+|------|---------|
+| [Supabase](https://supabase.com) | PostgreSQL database — stores reference submissions with row-level security |
+| [Formspree](https://formspree.io) | Email notification trigger — alerts when a new reference is submitted |
+
+**Reference approval flow:**
+1. Visitor submits the reference form → saved to Supabase with `approved = false`
+2. Formspree sends an email notification
+3. One click in the Supabase Table Editor flips `approved = true`
+4. Reference appears on the live site instantly — no code deploy needed
+
+Row-level security ensures only approved references are ever returned to the public. Unapproved submissions are invisible until explicitly approved.
+
+---
+
+## Deployment Workflow
+
+```
+Code change → git push → GitHub → Vercel auto-deploys → Live in ~30s
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+No manual deployment steps. Every commit to `main` is production.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Why This Approach
 
-## Learn More
+Most PM portfolios are PDFs or Notion pages. This one is a fully instrumented product. That's intentional.
 
-To learn more about Next.js, take a look at the following resources:
+Building and shipping this site is proof of the thing it's supposed to demonstrate: I can translate a product idea into a working, observable, measurable product using modern tools — without an engineering team. I wrote the requirements, made the build decisions, and shipped it.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The analytics aren't decoration. I use PostHog session recordings to see where visitors drop off, Vercel Analytics to track which channels drive traffic, and the custom events to know whether the resume is actually being downloaded. That feedback loop informs what gets updated next.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## Built With
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+[Claude Code](https://claude.ai/code) — AI-assisted development. Built using the [Claude Code for PMs](https://ccforpms.com) course.
