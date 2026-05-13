@@ -1,21 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { track } from '@vercel/analytics'
+import { supabase } from '../lib/supabase'
 
-const FORMSPREE_ID = 'xzdooqnq'
-
-// To add an approved reference: copy one of the objects below and fill in the details.
-// Push to GitHub and Vercel will auto-deploy the update.
-const REFERENCES: { name: string; title: string; company: string; relationship: string; quote: string }[] = [
-  {
-    name: "Jen H",
-    title: "Product Manager",
-    company: "Capital One",
-    relationship: "Worked together on Slingshot for Databricks",
-    quote: "Kirsten has a strong ability to get stakeholders aligned and drive to valuable decisions in situations with ambiguity and conflicting perspectives. She is known for strong product intuition and for consistently delivering results and building features that customers genuinely love and directly contribute to conversion and retention. Kirsten also has a huge impact on team culture. She cares deeply about people as individuals, invests in relationships and mentorship, and creates an environment where teammates feel supported and motivated. Any team would be lucky to have her!",
-  },
-]
+type Reference = { name: string; title: string; company: string; relationship: string; quote: string }
 
 const BASE_NAV_LINKS = [
   { label: 'About', href: '#about' },
@@ -25,9 +14,7 @@ const BASE_NAV_LINKS = [
   { label: 'Contact', href: '#contact' },
 ]
 
-const NAV_LINKS = REFERENCES.length > 0
-  ? [...BASE_NAV_LINKS.slice(0, 4), { label: 'References', href: '#references' }, BASE_NAV_LINKS[4]]
-  : BASE_NAV_LINKS
+const NAV_LINKS = BASE_NAV_LINKS
 
 const PROJECTS = [
   {
@@ -143,6 +130,16 @@ export default function Portfolio() {
   const [refSubmitted, setRefSubmitted] = useState(false)
   const [refError, setRefError] = useState(false)
   const [refForm, setRefForm] = useState({ name: '', title: '', company: '', email: '', relationship: '', message: '' })
+  const [references, setReferences] = useState<Reference[]>([])
+
+  useEffect(() => {
+    supabase
+      .from('endorsements')
+      .select('name, title, company, relationship, quote')
+      .eq('approved', true)
+      .order('created_at', { ascending: true })
+      .then(({ data }) => { if (data) setReferences(data) })
+  }, [])
 
   const handleCopyEmail = () => {
     track('contact_email_copy')
@@ -474,9 +471,9 @@ export default function Portfolio() {
         </p>
 
         {/* Approved reference cards */}
-        {REFERENCES.length > 0 && (
+        {references.length > 0 && (
           <div className="grid md:grid-cols-2 gap-6 mb-12">
-            {REFERENCES.map((ref, i) => (
+            {references.map((ref, i) => (
               <div
                 key={i}
                 className="rounded-2xl p-6 flex flex-col gap-4"
@@ -533,13 +530,16 @@ export default function Portfolio() {
           <form
             onSubmit={async (e) => {
               e.preventDefault()
-              const formData = new FormData(e.currentTarget)
-              const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
-                method: 'POST',
-                body: formData,
-                headers: { 'Accept': 'application/json' },
+              const { error } = await supabase.from('endorsements').insert({
+                name: refForm.name,
+                title: refForm.title,
+                company: refForm.company,
+                email: refForm.email,
+                relationship: refForm.relationship,
+                quote: refForm.message,
+                approved: false,
               })
-              if (res.ok) {
+              if (!error) {
                 track('reference_submitted')
                 setRefSubmitted(true)
               } else {
