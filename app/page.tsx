@@ -8,14 +8,13 @@ const FORMSPREE_ID = 'xzdooqnq'
 // To add an approved reference: copy one of the objects below and fill in the details.
 // Push to GitHub and Vercel will auto-deploy the update.
 const REFERENCES: { name: string; title: string; company: string; relationship: string; quote: string }[] = [
-  // Example — replace with real submissions:
-  // {
-  //   name: "Jane Smith",
-  //   title: "Senior Director of Product",
-  //   company: "Capital One",
-  //   relationship: "Direct manager",
-  //   quote: "Kirsten is one of the most thoughtful and data-driven PMs I've worked with...",
-  // },
+  {
+    name: "Jen H",
+    title: "Product Manager",
+    company: "Capital One",
+    relationship: "Worked together on Slingshot for Databricks",
+    quote: "Kirsten has a strong ability to get stakeholders aligned and drive to valuable decisions in situations with ambiguity and conflicting perspectives. She is known for strong product intuition and for consistently delivering results and building features that customers genuinely love and directly contribute to conversion and retention. Kirsten also has a huge impact on team culture. She cares deeply about people as individuals, invests in relationships and mentorship, and creates an environment where teammates feel supported and motivated. Any team would be lucky to have her!",
+  },
 ]
 
 const BASE_NAV_LINKS = [
