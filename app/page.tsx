@@ -49,7 +49,7 @@ const EXPERIENCE = [
     role: 'Product Manager — Slingshot',
     period: 'Jul 2024 — Present',
     highlights: [
-      'Sole PM for Slingshot — a B2B cloud management platform serving enterprise customers — driving roadmap strategy across multiple engineering teams focused on cost efficiency, visibility, and automated governance',
+      'Product Manager for Slingshot — a B2B cloud management platform serving enterprise customers — driving roadmap strategy across multiple engineering teams focused on cost efficiency, visibility, and automated governance',
       'Restored Snowflake Cost Alerts: engagement grew from 2.1% → 9.4% of sessions, tenant interaction from 24% → 45%',
       'Delivered Internal Viewer exceeding commitments by 25%, boosting CSM and support efficiency 5x by enabling full customer environment visibility',
       'Led Databricks expansion across three engineering teams — shipped two weeks ahead of schedule',
