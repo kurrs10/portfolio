@@ -515,9 +515,14 @@ export default function Portfolio() {
           </div>
         ) : (
           <form
-            action={`https://formspree.io/f/${FORMSPREE_ID}`}
-            method="POST"
-            onSubmit={() => {
+            onSubmit={async (e) => {
+              e.preventDefault()
+              const formData = new FormData(e.currentTarget)
+              await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+                method: 'POST',
+                body: formData,
+                headers: { 'Accept': 'application/json' },
+              })
               track('reference_submitted')
               setRefSubmitted(true)
             }}
