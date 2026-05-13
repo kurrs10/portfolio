@@ -540,6 +540,13 @@ export default function Portfolio() {
                 approved: false,
               })
               if (!error) {
+                // Send email notification via Formspree so we know to go approve in Supabase
+                const formData = new FormData(e.currentTarget)
+                await fetch(`https://formspree.io/f/xzdooqnq`, {
+                  method: 'POST',
+                  body: formData,
+                  headers: { 'Accept': 'application/json' },
+                })
                 track('reference_submitted')
                 setRefSubmitted(true)
               } else {
