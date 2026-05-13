@@ -47,7 +47,7 @@ const EXPERIENCE = [
   {
     company: 'Capital One',
     role: 'Product Manager — Slingshot',
-    period: 'Apr 2021 — Present',
+    period: 'Jul 2024 — Present',
     highlights: [
       'Sole PM for Slingshot — a B2B cloud management platform serving enterprise customers — driving roadmap strategy across multiple engineering teams focused on cost efficiency, visibility, and automated governance',
       'Restored Snowflake Cost Alerts: engagement grew from 2.1% → 9.4% of sessions, tenant interaction from 24% → 45%',
@@ -60,7 +60,7 @@ const EXPERIENCE = [
   {
     company: 'Capital One',
     role: 'Product Manager — Data Management Platform',
-    period: 'Apr 2021 — 2023',
+    period: 'Apr 2021 — Jul 2024',
     highlights: [
       'Earned promotion within 16 months — faster than the standard cycle — based on product impact',
       'Led full product experience redesign, reducing user friction and introducing new dataset metadata management capabilities',
