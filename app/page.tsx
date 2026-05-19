@@ -31,6 +31,8 @@ const PROJECTS = [
     tags: ['React Native', 'Expo', 'Supabase', 'Claude API', 'iOS'],
     link: 'https://github.com/kurrs10/voyagr',
     linkLabel: 'View on GitHub',
+    progressLink: 'https://github.com/kurrs10/voyagr/blob/main/DEVLOG.md',
+    progressLinkLabel: 'See progress',
     status: 'coming-soon',
   },
   {
@@ -360,22 +362,36 @@ export default function Portfolio() {
                   </span>
                 ))}
               </div>
-              {project.link ? (
-                <a
-                  href={project.link}
-                  target={project.link.startsWith('http') ? '_blank' : undefined}
-                  rel="noopener noreferrer"
-                  onClick={() => track('project_click', { project: project.title })}
-                  className="text-sm font-semibold transition-opacity hover:opacity-70"
-                  style={{ color: '#2d6a4f' }}
-                >
-                  {project.linkLabel} →
-                </a>
-              ) : (
-                <span className="text-sm font-semibold" style={{ color: '#a8c4a8' }}>
-                  {project.linkLabel}
-                </span>
-              )}
+              <div className="flex items-center gap-4">
+                {project.link ? (
+                  <a
+                    href={project.link}
+                    target={project.link.startsWith('http') ? '_blank' : undefined}
+                    rel="noopener noreferrer"
+                    onClick={() => track('project_click', { project: project.title })}
+                    className="text-sm font-semibold transition-opacity hover:opacity-70"
+                    style={{ color: '#2d6a4f' }}
+                  >
+                    {project.linkLabel} →
+                  </a>
+                ) : (
+                  <span className="text-sm font-semibold" style={{ color: '#a8c4a8' }}>
+                    {project.linkLabel}
+                  </span>
+                )}
+                {project.progressLink && (
+                  <a
+                    href={project.progressLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => track('project_progress_click', { project: project.title })}
+                    className="text-sm font-semibold transition-opacity hover:opacity-70"
+                    style={{ color: '#b8860b' }}
+                  >
+                    {project.progressLinkLabel} →
+                  </a>
+                )}
+              </div>
             </div>
           ))}
         </div>
