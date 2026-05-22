@@ -32,7 +32,9 @@ const PROJECTS = [
     link: 'https://github.com/kurrs10/voyagr-showcase',
     linkLabel: 'View on GitHub',
     progressLink: 'https://github.com/kurrs10/voyagr-showcase/blob/main/DEVLOG.md',
-    progressLinkLabel: 'See progress',
+    progressLinkLabel: 'Build log',
+    decisionsLink: 'https://github.com/kurrs10/voyagr-showcase/blob/main/PRODUCT-DECISIONS.md',
+    decisionsLinkLabel: 'Product decisions',
     status: 'coming-soon',
   },
   {
@@ -389,6 +391,18 @@ export default function Portfolio() {
                     style={{ color: '#b8860b' }}
                   >
                     {project.progressLinkLabel} →
+                  </a>
+                )}
+                {(project as any).decisionsLink && (
+                  <a
+                    href={(project as any).decisionsLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => track('project_decisions_click', { project: project.title })}
+                    className="text-sm font-semibold transition-opacity hover:opacity-70"
+                    style={{ color: '#6b4c9a' }}
+                  >
+                    {(project as any).decisionsLinkLabel} →
                   </a>
                 )}
               </div>
