@@ -26,8 +26,8 @@ const PROJECTS = [
     status: 'live',
   },
   {
-    title: 'VOYAGR — Travel Companion App',
-    description: 'A mobile app for couples and small groups who plan their own multi-country trips. VOYAGR consolidates all bookings in one place, validates them, and guides travelers in real time — fully offline. Features: step-by-step transit directions, per-passport entry requirements, AI free-time suggestions, expense splitting, language basics, packing lists, emergency contacts, currency + tipping guides, and customizable alerts. Shipping June 2026.',
+    title: 'Roam Wyld — Travel Companion App',
+    description: 'Your adventure, organized. A mobile app for couples and small groups who plan their own multi-country trips. Roam Wyld consolidates all bookings in one place, validates them, and guides travelers in real time — fully offline. Features: step-by-step transit directions, per-passport entry requirements, AI free-time suggestions, expense splitting, language basics, packing lists, emergency contacts, currency + tipping guides, and customizable alerts. Shipping June 2026.',
     tags: ['React Native', 'Expo', 'Supabase', 'Claude API', 'iOS'],
     link: 'https://github.com/kurrs10/voyagr-showcase',
     linkLabel: 'View on GitHub',
