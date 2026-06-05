@@ -27,14 +27,17 @@ const PROJECTS = [
   },
   {
     title: 'Roam Wyld — Travel Companion App',
+    siteUrl: 'https://roamwyld.app',
     description: 'Your adventure, organized. A mobile app for couples and small groups who plan their own multi-country trips. Roam Wyld consolidates all bookings in one place, validates them, and guides travelers in real time — fully offline. Features: step-by-step transit directions, per-passport entry requirements, AI free-time suggestions, expense splitting, language basics, packing lists, emergency contacts, currency + tipping guides, and customizable alerts. Shipping June 2026.',
     tags: ['React Native', 'Expo', 'Supabase', 'Claude API', 'iOS'],
-    link: 'https://github.com/kurrs10/voyagr-showcase',
-    linkLabel: 'View on GitHub',
-    progressLink: 'https://github.com/kurrs10/voyagr-showcase/blob/main/DEVLOG.md',
+    link: 'https://roamwyld.app',
+    linkLabel: 'Visit Website',
+    progressLink: 'https://github.com/kurrs10/RoamWyld-showcase/blob/main/DEVLOG.md',
     progressLinkLabel: 'Build log',
-    decisionsLink: 'https://github.com/kurrs10/voyagr-showcase/blob/main/PRODUCT-DECISIONS.md',
+    decisionsLink: 'https://github.com/kurrs10/RoamWyld-showcase/blob/main/PRODUCT-DECISIONS.md',
     decisionsLinkLabel: 'Product decisions',
+    githubLink: 'https://github.com/kurrs10/RoamWyld-showcase',
+    githubLinkLabel: 'GitHub',
     status: 'coming-soon',
   },
   {
@@ -350,6 +353,18 @@ export default function Portfolio() {
                   </span>
                 )}
               </div>
+              {(project as any).siteUrl && (
+                <a
+                  href={(project as any).siteUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => track('project_site_click', { project: project.title })}
+                  className="text-xs font-semibold mb-3 block transition-opacity hover:opacity-70"
+                  style={{ color: '#2d6a4f' }}
+                >
+                  {(project as any).siteUrl.replace('https://', '')} →
+                </a>
+              )}
               <p className="text-sm leading-relaxed mb-4 flex-1" style={{ color: '#3d5a3e' }}>
                 {project.description}
               </p>
@@ -403,6 +418,18 @@ export default function Portfolio() {
                     style={{ color: '#6b4c9a' }}
                   >
                     {(project as any).decisionsLinkLabel} →
+                  </a>
+                )}
+                {(project as any).githubLink && (
+                  <a
+                    href={(project as any).githubLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => track('project_github_click', { project: project.title })}
+                    className="text-sm font-semibold transition-opacity hover:opacity-70"
+                    style={{ color: '#3d5a3e' }}
+                  >
+                    {(project as any).githubLinkLabel} →
                   </a>
                 )}
               </div>
