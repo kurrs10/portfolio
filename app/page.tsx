@@ -30,8 +30,8 @@ const PROJECTS = [
     siteUrl: 'https://roamwyld.app',
     description: 'Your adventure, organized. A mobile app for couples and small groups who plan their own multi-country trips. Roam Wyld consolidates all bookings in one place, validates them, and guides travelers in real time — fully offline. Features: step-by-step transit directions, per-passport entry requirements, AI free-time suggestions, expense splitting, language basics, packing lists, emergency contacts, currency + tipping guides, and customizable alerts. Shipping June 2026.',
     tags: ['React Native', 'Expo', 'Supabase', 'Claude API', 'iOS'],
-    link: 'https://roamwyld.app',
-    linkLabel: 'Visit Website',
+    link: '',
+    linkLabel: '',
     progressLink: 'https://github.com/kurrs10/RoamWyld-showcase/blob/main/DEVLOG.md',
     progressLinkLabel: 'Build log',
     decisionsLink: 'https://github.com/kurrs10/RoamWyld-showcase/blob/main/PRODUCT-DECISIONS.md',
@@ -380,7 +380,7 @@ export default function Portfolio() {
                 ))}
               </div>
               <div className="flex items-center gap-4">
-                {project.link ? (
+                {project.link && (
                   <a
                     href={project.link}
                     target={project.link.startsWith('http') ? '_blank' : undefined}
@@ -391,10 +391,6 @@ export default function Portfolio() {
                   >
                     {project.linkLabel} →
                   </a>
-                ) : (
-                  <span className="text-sm font-semibold" style={{ color: '#a8c4a8' }}>
-                    {project.linkLabel}
-                  </span>
                 )}
                 {project.progressLink && (
                   <a
