@@ -4,13 +4,17 @@ name: Supabase keepalive
 # route daily so the free-tier Supabase project never hits the 7-day
 # auto-pause. Needs no secrets — the route reads Supabase server-side.
 #
-# NOTE: GitHub disables scheduled workflows after 60 days with no repo
-# activity. Any push to the repo (or a manual "Run workflow") re-arms it.
+# GitHub disables scheduled workflows after 60 days with no repo activity.
+# The last step re-enables this workflow through the API on every run, which
+# resets that timer without needing commits.
 
 on:
   schedule:
     - cron: '30 6 * * *'
   workflow_dispatch:
+
+permissions:
+  actions: write
 
 jobs:
   ping:
@@ -20,3 +24,10 @@ jobs:
         run: |
           curl -sSf --retry 3 --retry-delay 30 \
             https://www.kirstenmoberly.com/api/keepalive
+
+      - name: Keep this workflow from being auto-disabled
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api -X PUT \
+            "repos/${{ github.repository }}/actions/workflows/supabase-keepalive.yml/enable"
