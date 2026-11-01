@@ -52,9 +52,17 @@ const PROJECTS = [
 
 const EXPERIENCE = [
   {
+    company: 'Allstate',
+    role: 'Digital Product Manager — Cloud Hosting',
+    period: 'Sep 2026 — Present',
+    highlights: [
+      'Digital Product Manager on the Cloud Hosting team',
+    ],
+  },
+  {
     company: 'Capital One',
     role: 'Product Manager — Slingshot',
-    period: 'Jul 2024 — Present',
+    period: 'Jul 2024 — May 2026',
     highlights: [
       'Product Manager for Slingshot — a B2B cloud management platform serving enterprise customers — driving roadmap strategy across multiple engineering teams focused on cost efficiency, visibility, and automated governance',
       'Restored Snowflake Cost Alerts: engagement grew from 2.1% → 9.4% of sessions, tenant interaction from 24% → 45%',

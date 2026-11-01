@@ -21,7 +21,7 @@ test.describe('Page', () => {
     await page.goto('/')
     await page.waitForLoadState('networkidle')
     await expect(page.getByText('Product Manager — Slingshot')).toBeVisible()
-    await expect(page.getByText('Jul 2024 — Present')).toBeVisible()
+    await expect(page.getByText('Jul 2024 — May 2026')).toBeVisible()
     await expect(page.getByText('Product Manager — Data Management Platform')).toBeVisible()
     await expect(page.getByText('Apr 2021 — Jul 2024')).toBeVisible()
   })
