@@ -28,8 +28,8 @@ const PROJECTS = [
   {
     title: 'Roam Wyld — Travel Companion App',
     siteUrl: 'https://roamwyld.app',
-    description: 'Your adventure, organized. A mobile app for couples and small groups who plan their own multi-country trips. Roam Wyld consolidates all bookings in one place, validates them, and guides travelers in real time — fully offline. Features: step-by-step transit directions, per-passport entry requirements, AI free-time suggestions, expense splitting, language basics, packing lists, emergency contacts, currency + tipping guides, and customizable alerts. Shipping June 2026.',
-    tags: ['React Native', 'Expo', 'Supabase', 'Claude API', 'iOS'],
+    description: 'Your adventure, organized. A mobile app for couples and small groups who plan their own multi-country trips. Roam Wyld consolidates all bookings in one place, validates them, and guides travelers in real time — fully offline. Features: step-by-step transit directions, per-passport entry requirements, AI free-time suggestions, expense splitting, language basics, packing lists, emergency contacts, currency + tipping guides, and customizable alerts. Latest: Android is in Google Play production review. A four-way security audit closed a booking-injection bug and moved flight and hotel API keys off the device to the server. Entry-requirements data is refreshed for the EU\'s new Entry/Exit System (EES) and ETIAS. Pro is designed around features with no per-use AI cost.',
+    tags: ['React Native', 'Expo', 'Supabase', 'Claude API', 'iOS', 'Android'],
     link: '',
     linkLabel: '',
     progressLink: 'https://github.com/kurrs10/RoamWyld-showcase/blob/main/DEVLOG.md',
