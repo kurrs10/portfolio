@@ -53,10 +53,13 @@ const PROJECTS = [
 const EXPERIENCE = [
   {
     company: 'Allstate',
-    role: 'Digital Product Manager — Cloud Hosting',
+    role: 'Digital Product Manager — Azure Technologies',
     period: 'Sep 2026 — Present',
     highlights: [
-      'Digital Product Manager on the Cloud Hosting team',
+      'Product Manager for Azure technologies on the Cloud Hosting team within Allstate\'s Architecture, Compute & Engineering (ACE) organization',
+      'Own vision, strategy, and roadmap for Azure cloud hosting capabilities used by engineering teams across the enterprise',
+      'Partner with engineering, architecture, and security to prioritize the backlog across compute, infrastructure-as-code, and automation',
+      'Use usage data and customer feedback from internal engineering teams to measure adoption and guide platform investments',
     ],
   },
   {
