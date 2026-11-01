@@ -28,7 +28,7 @@ test.describe('Page', () => {
 })
 
 test.describe('Projects', () => {
-  test('VOYAGR card shows both GitHub and See progress links', async ({ page }) => {
+  test('Roam Wyld card shows both GitHub and See progress links', async ({ page }) => {
     await page.goto('/')
     await page.waitForLoadState('networkidle')
     await expect(page.getByRole('link', { name: /View on GitHub/i }).first()).toBeVisible()
