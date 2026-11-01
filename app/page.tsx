@@ -28,17 +28,17 @@ const PROJECTS = [
   {
     title: 'Roam Wyld — Travel Companion App',
     siteUrl: 'https://roamwyld.app',
-    description: 'Your adventure, organized. A mobile app for couples and small groups who plan their own multi-country trips. Roam Wyld consolidates all bookings in one place, validates them, and guides travelers in real time — fully offline. Features: step-by-step transit directions, per-passport entry requirements, AI free-time suggestions, expense splitting, language basics, packing lists, emergency contacts, currency + tipping guides, and customizable alerts. Latest: Android is in Google Play production review. A four-way security audit closed a booking-injection bug and moved flight and hotel API keys off the device to the server. Entry-requirements data is refreshed for the EU\'s new Entry/Exit System (EES) and ETIAS. Pro is designed around features with no per-use AI cost.',
+    description: 'Your trip, in one place. A mobile app for couples and small groups who plan their own multi-country trips. It pulls every booking into one place, checks them for problems, and guides travelers in real time, fully offline. Live on iOS; Android is in Google Play production review. Recent work: a four-way security audit that closed a booking-injection bug and moved flight and hotel API keys to the server, entry requirements refreshed for the EU\'s new EES and ETIAS checks, and a Pro tier designed around features with no per-use AI cost.',
     tags: ['React Native', 'Expo', 'Supabase', 'Claude API', 'iOS', 'Android'],
-    link: '',
-    linkLabel: '',
+    link: 'https://apps.apple.com/us/app/roam-wyld/id6774633699',
+    linkLabel: 'App Store',
     progressLink: 'https://github.com/kurrs10/RoamWyld-showcase/blob/main/DEVLOG.md',
     progressLinkLabel: 'Build log',
     decisionsLink: 'https://github.com/kurrs10/RoamWyld-showcase/blob/main/PRODUCT-DECISIONS.md',
     decisionsLinkLabel: 'Product decisions',
     githubLink: 'https://github.com/kurrs10/RoamWyld-showcase',
     githubLinkLabel: 'GitHub',
-    status: 'coming-soon',
+    status: 'live',
   },
   {
     title: 'GitHub',
@@ -390,14 +390,14 @@ export default function Portfolio() {
                   </span>
                 ))}
               </div>
-              <div className="flex items-center gap-4">
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
                 {project.link && (
                   <a
                     href={project.link}
                     target={project.link.startsWith('http') ? '_blank' : undefined}
                     rel="noopener noreferrer"
                     onClick={() => track('project_click', { project: project.title })}
-                    className="text-sm font-semibold transition-opacity hover:opacity-70"
+                    className="text-sm font-semibold whitespace-nowrap transition-opacity hover:opacity-70"
                     style={{ color: '#2d6a4f' }}
                   >
                     {project.linkLabel} →
@@ -409,7 +409,7 @@ export default function Portfolio() {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => track('project_progress_click', { project: project.title })}
-                    className="text-sm font-semibold transition-opacity hover:opacity-70"
+                    className="text-sm font-semibold whitespace-nowrap transition-opacity hover:opacity-70"
                     style={{ color: '#b8860b' }}
                   >
                     {project.progressLinkLabel} →
@@ -421,7 +421,7 @@ export default function Portfolio() {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => track('project_decisions_click', { project: project.title })}
-                    className="text-sm font-semibold transition-opacity hover:opacity-70"
+                    className="text-sm font-semibold whitespace-nowrap transition-opacity hover:opacity-70"
                     style={{ color: '#6b4c9a' }}
                   >
                     {(project as any).decisionsLinkLabel} →
@@ -433,7 +433,7 @@ export default function Portfolio() {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => track('project_github_click', { project: project.title })}
-                    className="text-sm font-semibold transition-opacity hover:opacity-70"
+                    className="text-sm font-semibold whitespace-nowrap transition-opacity hover:opacity-70"
                     style={{ color: '#3d5a3e' }}
                   >
                     {(project as any).githubLinkLabel} →
