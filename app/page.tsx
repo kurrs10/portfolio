@@ -253,7 +253,7 @@ export default function Portfolio() {
         </p>
         <div className="flex flex-wrap gap-3">
           <a
-            href="https://www.linkedin.com/in/kirsten-evans27"
+            href="https://www.linkedin.com/in/kirstenmoberly"
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => track('linkedin_click', { location: 'hero' })}
@@ -699,7 +699,7 @@ export default function Portfolio() {
             {copied ? '✓ Copied!' : 'moberlykirsten@gmail.com'}
           </button>
           <a
-            href="https://www.linkedin.com/in/kirsten-evans27"
+            href="https://www.linkedin.com/in/kirstenmoberly"
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => track('linkedin_click', { location: 'contact' })}
