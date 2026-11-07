@@ -53,7 +53,7 @@ const PROJECTS = [
 const EXPERIENCE = [
   {
     company: 'Allstate',
-    role: 'Digital Product Manager Expert — Azure Technologies',
+    role: 'Expert Digital Product Manager — Azure Technologies',
     period: 'Sep 2026 — Present',
     highlights: [
       'Product Manager for Azure technologies on the Cloud Hosting team within Allstate\'s Architecture, Compute & Engineering (ACE) organization',
