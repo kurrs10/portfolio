@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Kirsten Evans — Product Manager",
+  title: "Kirsten Moberly — Product Manager",
   description: "Data-driven PM with 9+ years building enterprise products — cloud platforms, fraud detection, mobile apps, and AI-powered tools.",
 };
 

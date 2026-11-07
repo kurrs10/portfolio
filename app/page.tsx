@@ -53,7 +53,7 @@ const PROJECTS = [
 const EXPERIENCE = [
   {
     company: 'Allstate',
-    role: 'Digital Product Manager — Azure Technologies',
+    role: 'Digital Product Manager Expert — Azure Technologies',
     period: 'Sep 2026 — Present',
     highlights: [
       'Product Manager for Azure technologies on the Cloud Hosting team within Allstate\'s Architecture, Compute & Engineering (ACE) organization',
@@ -177,7 +177,7 @@ export default function Portfolio() {
       >
         <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
           <span className="font-bold text-lg tracking-tight" style={{ color: '#2d6a4f' }}>
-            Kirsten Evans
+            Kirsten Moberly
           </span>
           {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-6">
@@ -733,7 +733,7 @@ export default function Portfolio() {
       <footer className="border-t mt-8 py-8" style={{ borderColor: '#ddeedd' }}>
         <div className="max-w-5xl mx-auto px-6 flex flex-wrap justify-between items-center gap-4">
           <span className="text-sm" style={{ color: '#7a9e7a' }}>
-            © 2026 Kirsten Evans
+            © 2026 Kirsten Moberly
             <span className="ml-2" style={{ color: '#a8c4a8' }}>
               (Yes, the domain is a different last name — not a bug, I&apos;m getting married!)
             </span>
