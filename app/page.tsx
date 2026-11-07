@@ -161,7 +161,7 @@ export default function Portfolio() {
 
   const handleCopyEmail = () => {
     track('contact_email_copy')
-    navigator.clipboard.writeText('kbevans13@gmail.com').then(() => {
+    navigator.clipboard.writeText('moberlykirsten@gmail.com').then(() => {
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
     })
@@ -581,7 +581,7 @@ export default function Portfolio() {
           >
             <div className="text-3xl mb-3">⚠️</div>
             <h3 className="font-bold text-lg mb-2" style={{ color: '#dc2626' }}>Something went wrong</h3>
-            <p className="text-sm mb-4" style={{ color: '#6b4c2a' }}>The submission didn't go through. Please try again or email Kirsten directly at kbevans13@gmail.com.</p>
+            <p className="text-sm mb-4" style={{ color: '#6b4c2a' }}>The submission didn't go through. Please try again or email Kirsten directly at moberlykirsten@gmail.com.</p>
             <button
               onClick={() => setRefError(false)}
               className="text-sm font-semibold underline"
@@ -696,7 +696,7 @@ export default function Portfolio() {
             className="px-6 py-3 rounded-full font-semibold text-white transition-opacity hover:opacity-90"
             style={{ backgroundColor: '#2d6a4f' }}
           >
-            {copied ? '✓ Copied!' : 'kbevans13@gmail.com'}
+            {copied ? '✓ Copied!' : 'moberlykirsten@gmail.com'}
           </button>
           <a
             href="https://www.linkedin.com/in/kirsten-evans27"
